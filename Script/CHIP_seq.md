@@ -55,3 +55,28 @@ bamCoverage \
     --normalizeUsing RPKM \
     --numberOfProcessors 20
 ```
+## Callpeak
+```bash
+mkdir -p peak
+# Narrow peak
+macs2 callpeak \
+      -t dedup/CHIP_IP_dedup.bam \
+      -c dedup/CHIP_INPUT_dedup.bam \
+      -g mm \
+      --nomodel \
+      -p 0.00001 \
+      -n SAMPLE_NAME \
+      --outdir peak -f BAMPE 
+
+# Broad peak
+macs2 callpeak \
+      -t dedup/CHIP_IP_dedup.bam \
+      -c dedup/CHIP_INPUT_dedup.bam \
+      -g mm \
+      --nomodel \
+      -p 0.00001 \
+      -n SAMPLE_NAME \
+      --broad \
+      --broad-cutoff 0.05 \
+      --outdir peak -f BAMPE
+```
