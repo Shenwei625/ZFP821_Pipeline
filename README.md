@@ -2,7 +2,6 @@
 Analysis Pipeline Code for the ZFP821 Project
 
 ## Requirements
-```
 - Fastp 0.23.4
 - Bowtie2 2.5.4
 - STAR 2.7.11b
@@ -12,4 +11,6 @@ Analysis Pipeline Code for the ZFP821 Project
 - TEtranscripts 2.2.3
 - DESeq2 1.44.0
 - R 4.4.1
-```
+
+## Input
+- FASTQ files in ./data/
