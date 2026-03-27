@@ -5,8 +5,8 @@ SAMPLE=
 
 mkdir -p test_data/${SAMPLE}/trim
 fastp --thread 20 --detect_adapter_for_pe --trim_poly_x \
-    -i test_data/${SAMPLE}/${SAMPLE}_1.fastq.gz \
-    -I test_data/${SAMPLE}/${SAMPLE}_2.fastq.gz \
+    -i Example_data/ChIP_seq/${SAMPLE}_R1.fastq.gz \
+    -I Example_data/ChIP_seq/${SAMPLE}_R2.fastq.gz \
     -o test_data/${SAMPLE}/trim/${SAMPLE}_1.fastq.gz \
     -O test_data/${SAMPLE}/trim/${SAMPLE}_2.fastq.gz \
     -h test_data/${SAMPLE}/trim/report.html \
@@ -48,7 +48,7 @@ mkdir -p bw_file
 samtools index -@ 20 dedup/${SAMPLE}_dedup.bam
 bamCoverage \
     -b dedup/${SAMPLE}_dedup.bam \
-    -o bw_file/${SAMPLE}.bigwig \
+    -o bw_file/${SAMPLE}_5_RPKM.bigwig \
     --binSize 5 \
     --normalizeUsing RPKM \
     --numberOfProcessors 20

@@ -5,8 +5,8 @@ SAMPLE=
 
 mkdir -p test_data/${SAMPLE}/trim
 fastp --thread 20 --detect_adapter_for_pe --trim_poly_x \
-    -i test_data/${SAMPLE}/${SAMPLE}_1.fastq.gz \
-    -I test_data/${SAMPLE}/${SAMPLE}_2.fastq.gz \
+    -i Example_data/RNA_seq/${SAMPLE}_R1.fastq.gz \
+    -I Example_data/RNA_seq/${SAMPLE}_R2.fastq.gz \
     -o test_data/${SAMPLE}/trim/${SAMPLE}_1.fastq.gz \
     -O test_data/${SAMPLE}/trim/${SAMPLE}_2.fastq.gz \
     -h test_data/${SAMPLE}/trim/report.html \
@@ -60,7 +60,7 @@ STAR --runThreadN 20 \
 mkdir -p featurecount
 featureCounts -p -Q 10 -s 2 --countReadPairs -T 40 \
 -a reference/mm10.ncbiRefSeq.gtf -g gene_id -t exon -o featurecount/${SAMPLE}_gene_count.txt \
-map_LINE/${BAM_FILE}_Aligned.sortedByCoord.out.bam
+map_output_STAR/${SAMPLE}_Aligned.sortedByCoord.out.bam
 
 # For TE count
 mkdir -p tecount
