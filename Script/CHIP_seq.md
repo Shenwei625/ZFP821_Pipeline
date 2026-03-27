@@ -18,7 +18,9 @@ fastqc -t 20 -o test_data/${SAMPLE}/trim/fastqc test_data/${SAMPLE}/trim/${SAMPL
 ```
 ## Align
 ```bash
-mkdir -p index
+mkdir -p index reference
+wget https://github.com/yulab-ql/mhaESC_genome/releases/download/mT2T-Y/mhaESC_v1.1_with_mT2T-Y_v1.0.250617.fasta.gz -O reference/mhaESC_v1.1_with_mT2T-Y_v1.0.250617.fasta.gz
+pigz -dcf reference/mhaESC_v1.1_with_mT2T-Y_v1.0.250617.fasta.gz > reference/mhaESC_v1.1_with_mT2T-Y_v1.0.250617.fasta
 bowtie2-build --threads 20 reference/mhaESC_v1.1_with_mT2T-Y_v1.0.250617.fasta index/mouse_t2t
 
 mkdir -p map_output
