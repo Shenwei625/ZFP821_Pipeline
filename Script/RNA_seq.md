@@ -67,7 +67,7 @@ mkdir -p tecount
 TEcount --format BAM -b map_output_STAR/${SAMPLE}_Aligned.sortedByCoord.out.bam --GTF reference/mm10.ncbiRefSeq.gtf --TE GRCm38_GENCODE_rmsk_TE.gtf --sortByPos --mode multi --project tecount/${SAMPLE}
 ## The file "GRCm38_GENCODE_rmsk_TE.gtf" should be downloaded from the TEtranscripts official website.
 ```
-## Deseq2
+## Extraction of differentially expressed genes
 ```R
 library(DESeq2) 
 data <- read.table("data/RNA_seq/RS_count.tsv", header = TRUE, sep = "\t", row.names = 1)
