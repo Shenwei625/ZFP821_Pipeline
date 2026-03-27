@@ -38,7 +38,7 @@ STAR --runThreadN 20 \
      --genomeDir STAR_index/mm10 \
      --readFilesIn test_data/${SAMPLE}/trim/${SAMPLE}_1.fastq.gz test_data/${SAMPLE}/trim/${SAMPLE}_2.fastq.gz \
      --readFilesCommand zcat \
-     --outFileNameSAMPLE map_output_STAR/${SAMPLE}_ \
+     --outFileNamePrefix map_output_STAR/${SAMPLE}_ \
      --outSAMtype BAM SortedByCoordinate \
      --outSAMstrandField intronMotif \
      --alignEndsType EndToEnd \
