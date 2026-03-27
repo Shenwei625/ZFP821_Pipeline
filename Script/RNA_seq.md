@@ -70,7 +70,7 @@ TEcount --format BAM -b map_output_STAR/${SAMPLE}_Aligned.sortedByCoord.out.bam 
 ## Extraction of differentially expressed genes
 ```R
 library(DESeq2) 
-data <- read.table("data/RNA_seq/RS_count.tsv", header = TRUE, sep = "\t", row.names = 1)
+data <- read.table("Example_data/RNA_seq/RS_gene_matrix.tsv", header = TRUE, sep = "\t", row.names = 1)
 colData <- data.frame(
   condition = factor(c("WT", "WT", "KO", "KO")),
   batch = factor(c("batch1","batch2","batch1","batch2"))
