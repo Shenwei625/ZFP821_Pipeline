@@ -4,7 +4,7 @@
 SAMPLE=
 
 mkdir -p test_data/${SAMPLE}/trim
-fastp --thread 20 --detect_adapter_for_pe --trim_poly_x \
+fastp --thread 16 --detect_adapter_for_pe --trim_poly_x \
     -i Example_data/ChIP_seq/${SAMPLE}_R1.fastq.gz \
     -I Example_data/ChIP_seq/${SAMPLE}_R2.fastq.gz \
     -o test_data/${SAMPLE}/trim/${SAMPLE}_1.fastq.gz \
