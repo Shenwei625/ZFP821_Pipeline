@@ -3,10 +3,6 @@
 ```bash
 SAMPLE=
 
-mkdir -p test_data/${SAMPLE}/fastqc
-fastqc -t 20 -o test_data/${SAMPLE}/fastqc test_data/${SAMPLE}/${SAMPLE}_1.fastq.gz
-fastqc -t 20 -o test_data/${SAMPLE}/fastqc test_data/${SAMPLE}/${SAMPLE}_2.fastq.gz
-
 mkdir -p test_data/${SAMPLE}/trim
 fastp --thread 20 --detect_adapter_for_pe --trim_poly_x \
     -i test_data/${SAMPLE}/${SAMPLE}_1.fastq.gz \

@@ -3,10 +3,6 @@
 ```bash
 SAMPLE=
 
-mkdir -p test_data/${SAMPLE}/fastqc
-fastqc -t 20 -o test_data/${SAMPLE}/fastqc test_data/${SAMPLE}/${SAMPLE}_1.fastq.gz
-fastqc -t 20 -o test_data/${SAMPLE}/fastqc test_data/${SAMPLE}/${SAMPLE}_2.fastq.gz
-
 mkdir -p test_data/${SAMPLE}/trim
 fastp --thread 20 --detect_adapter_for_pe --trim_poly_x \
     -i test_data/${SAMPLE}/${SAMPLE}_1.fastq.gz \
@@ -60,6 +56,41 @@ STAR --runThreadN 20 \
 ```
 ## Count
 ```bash
+# For gene count
+mkdir -p featurecount
+featureCounts -p -Q 10 -s 2 --countReadPairs -T 40 \
+-a reference/mm10.ncbiRefSeq.gtf -g gene_id -t exon -o featurecount/${SAMPLE}_gene_count.txt \
+map_LINE/${BAM_FILE}_Aligned.sortedByCoord.out.bam
+
+# For TE count
 mkdir -p tecount
 TEcount --format BAM -b map_output_STAR/${SAMPLE}_Aligned.sortedByCoord.out.bam --GTF reference/mm10.ncbiRefSeq.gtf --TE GRCm38_GENCODE_rmsk_TE.gtf --sortByPos --mode multi --project tecount/${SAMPLE}
+## The file "GRCm38_GENCODE_rmsk_TE.gtf" should be downloaded from the TEtranscripts official website.
+
+```
+## Deseq2
+```R
+library(DESeq2) 
+data <- read.table("data/RNA_seq/RS_count.tsv", header = TRUE, sep = "\t", row.names = 1)
+colData <- data.frame(
+  condition = factor(c("WT", "WT", "KO", "KO")),
+  batch = factor(c("batch1","batch2","batch1","batch2"))
+)
+countdata <- data[rowMeans(data) > 0, ]
+dds <- DESeqDataSetFromMatrix(
+  countData = countdata,
+  colData = colData,
+  design = ~ batch + condition
+)
+dds <- DESeq(dds)
+normalized_counts <- counts(dds, normalized=TRUE)
+norm_df <- as.data.frame(normalized_counts)
+norm_df$Gene <- rownames(norm_df)
+norm_df <- norm_df[, c("Gene", setdiff(colnames(norm_df), "Gene"))]
+
+res <- results(dds, contrast = c("condition", "KO", "WT"))
+res_df <- as.data.frame(res)
+res_df$Gene <- rownames(res_df)
+res_df <- res_df[, c("Gene", setdiff(colnames(res_df), "Gene"))]
+write.table(res_df, "Output/RNA_seq/RS_deseq2.tsv", sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
 ```
