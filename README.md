@@ -23,8 +23,8 @@ The pipeline can be run on a standard workstation.
 
 ## Input
 
-- FASTQ files in ./data/ (only test data are included in this repository; the complete datasets are available from GEO)
-- Expression matrix files in ./data/
+- FASTQ files in ./Example_data/ (only test data are included in this repository; the complete datasets are available from GEO)
+- Expression matrix files in ./Example_data/
 
 ## Usage
 
