@@ -66,7 +66,6 @@ map_LINE/${BAM_FILE}_Aligned.sortedByCoord.out.bam
 mkdir -p tecount
 TEcount --format BAM -b map_output_STAR/${SAMPLE}_Aligned.sortedByCoord.out.bam --GTF reference/mm10.ncbiRefSeq.gtf --TE GRCm38_GENCODE_rmsk_TE.gtf --sortByPos --mode multi --project tecount/${SAMPLE}
 ## The file "GRCm38_GENCODE_rmsk_TE.gtf" should be downloaded from the TEtranscripts official website.
-
 ```
 ## Deseq2
 ```R
